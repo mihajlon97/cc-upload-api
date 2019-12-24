@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "await-to-js": "^2.0.1",
+    "aws-sdk": "^2.596.0",
     "axios": "^0.19.0",
     "body-parser": "^1.18.3",
     "canvas": "^2.6.1",
@@ -16,6 +17,7 @@
     "morgan": "~1.9.0",
     "npm": "^6.4.1",
     "parse-error": "^0.2.0",
+    "randomstring": "^1.1.5",
     "sharp": "^0.23.4"
   }
 }

@@ -2,6 +2,16 @@ const { ReE, ReS, to, TE }         = require('../services/UtilService');
 const axios                        = require('axios');
 const formidable                   = require('formidable');
 const sharp                        = require('sharp');
+const AWS                          = require("aws-sdk");
+const randomstring                 = require("randomstring");
+
+AWS.config = new AWS.Config();
+
+// We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
+AWS.config.accessKeyId = 'AKIAWQ7LVV7TNKIRAEVU';
+AWS.config.secretAccessKey =  '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';
+AWS.config.region = 'eu-central-1';
+const s3Bucket = new AWS.S3({ params: { Bucket: 'blurring-images' }});
 
 /**
  * Upload endpoint
@@ -16,27 +26,29 @@ const upload = async function(req, res){
 				const xLimit = Math.floor(width / 2);
 				const yLimit = Math.floor(height / 2);
 
-				console.log({xLimit, yLimit})
-				sharp(files.file.path).extract({
-					left: 0,
-					top: 0,
-					width: xLimit,
-					height: yLimit
-				}).toFile('11.jpg', function (err, info) {
-					if (err) return console.log(err);
-					else console.log('11.jpg', info);
-				});
-
+				const blurringId = randomstring.generate(7);
 
 				// Top left
 				file.extract({
-					left: 0,
+					left: xLimit,
 					top: 0,
 					width: xLimit,
 					height: yLimit
-				}).toFile('./1.jpg', function (err, info) {
-					if (err) TE(err);
-				});
+				}).toBuffer()
+					.then(async buffer => {
+						await s3Bucket.putObject({
+							Key: 'images-'+ blurringId +'/1.' + format,
+							Body: Buffer.from(buffer, 'base64'),
+							ContentEncoding: 'base64',
+							ContentType: 'image/png',
+							ACL: 'public-read'
+						}, function (err) {
+							if (err) console.log(err);
+						});
+					})
+					.catch(err => {
+						if (err) TE(err);
+					});
 
 				// Top right
 				file.extract({
@@ -44,9 +56,21 @@ const upload = async function(req, res){
 					top: 0,
 					width: xLimit,
 					height: yLimit
-				}).toFile('2.jpg', function (err) {
-					if (err) TE(err);
-				});
+				}).toBuffer()
+					.then(async buffer => {
+						await s3Bucket.putObject({
+							Key: 'images-'+ blurringId +'/2.' + format,
+							Body: Buffer.from(buffer, 'base64'),
+							ContentEncoding: 'base64',
+							ContentType: 'image/png',
+							ACL: 'public-read'
+						}, function (err) {
+							if (err) console.log(err);
+						});
+					})
+					.catch(err => {
+						if (err) TE(err);
+					});
 
 				// Bottom left
 				file.extract({
@@ -54,9 +78,21 @@ const upload = async function(req, res){
 					top: yLimit,
 					width: xLimit,
 					height: yLimit
-				}).toFile('3.jpg', function (err) {
-					if (err) TE(err);
-				});
+				}).toBuffer()
+					.then(async buffer => {
+						await s3Bucket.putObject({
+							Key: 'images-'+ blurringId +'/3.' + format,
+							Body: Buffer.from(buffer, 'base64'),
+							ContentEncoding: 'base64',
+							ContentType: 'image/png',
+							ACL: 'public-read'
+						}, function (err) {
+							if (err) console.log(err);
+						});
+					})
+					.catch(err => {
+						if (err) TE(err);
+					});
 
 				// Bottom right
 				file.extract({
@@ -64,9 +100,21 @@ const upload = async function(req, res){
 					top: yLimit,
 					width: xLimit,
 					height: yLimit
-				}).toFile('4.jpg', function (err) {
-					if (err) TE(err);
-				});
+				}).toBuffer()
+					.then(async buffer => {
+						await s3Bucket.putObject({
+							Key: 'images-'+ blurringId +'/4.' + format,
+							Body: Buffer.from(buffer, 'base64'),
+							ContentEncoding: 'base64',
+							ContentType: 'image/png',
+							ACL: 'public-read'
+						}, function (err) {
+							if (err) console.log(err);
+						});
+					})
+					.catch(err => {
+						if (err) TE(err);
+					});
 
 				return ReS(res, {message: 'Success', width, height, format});
 			})
