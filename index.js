@@ -6,20 +6,25 @@ const cors       = require('cors');
 
 const routes = require('./routes')(express);
 
-const index = express();
+const app = express();
 
-index.use(logger('dev'));
-index.use(bodyParser.json());
-index.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // CORS
-index.use(cors());
+app.use(cors());
 
 // API Routes
-index.use('/', routes);
+app.use('/', routes);
+
+// Serve frontend app
+app.get('/', function(req, res) {
+	res.sendFile(require('path').join(__dirname + '/frontend/index.html'));
+});
 
 // Catch 404 and forward to error handler
-index.use(function(req, res, next) {
+app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -31,7 +36,6 @@ process.on('unhandledRejection', error => {
 });
 
 const port = '7878';
-
 //Listen to port
-index.listen(port);
+app.listen(port);
 console.log("Listening to port: " + port);

@@ -10,18 +10,31 @@ const upload = async function(req, res){
 	let form = new formidable.IncomingForm();
 
 	form.parse(req, function(err, fields, files) {
-		const file = sharp(files.file.path);
-		const xLimit = Math.floor(width / 2);
-		const yLimit = Math.floor(height / 2);
 		try {
+			const file = sharp(files.file.path);
 			file.metadata().then(function ({ width, height, format}) {
+				const xLimit = Math.floor(width / 2);
+				const yLimit = Math.floor(height / 2);
+
+				console.log({xLimit, yLimit})
+				sharp(files.file.path).extract({
+					left: 0,
+					top: 0,
+					width: xLimit,
+					height: yLimit
+				}).toFile('11.jpg', function (err, info) {
+					if (err) return console.log(err);
+					else console.log('11.jpg', info);
+				});
+
+
 				// Top left
 				file.extract({
 					left: 0,
 					top: 0,
 					width: xLimit,
 					height: yLimit
-				}).toFile('1.jpg', function (err) {
+				}).toFile('./1.jpg', function (err, info) {
 					if (err) TE(err);
 				});
 

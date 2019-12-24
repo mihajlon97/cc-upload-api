@@ -1,10 +1,10 @@
-# Cloud Computing WS2019
+# Cloud Computing WS2019 | Assignment 3
 ## Mihajlo Nikodijevic - 01646292
 
-## Collector MS
+## Node.js Upload API
 
 To run:
-  docker run -p 7777:7777 collector
+  docker run -p 7878:7878 upload-api
 
 Choose network you need, e.g.: --network host
 

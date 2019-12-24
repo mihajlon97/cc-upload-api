@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title> Group B | Assignment 3</title>
+    <style media="screen">
+      #app {
+        padding-top: 100px;
+        width: 30%;
+        margin: 0 auto;
+      }
+
+      #preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #preview img {
+        max-width: 100%;
+        max-height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="app">
+      <h1> Upload image </h1>
+      <h4> Choose big image (High  resolution)</h4>
+
+      <form @submit.prevent="upload">
+        <input ref="image" type="file" name="image" @change="handleFileUpload()">
+        <div id="preview">
+          <img v-if="url" :src="url" />
+        </div>
+        <button type="submit"> Submit </button>
+      </form>
+    </div>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          image: '',
+          url: ''
+        }
+      },
+      methods: {
+        handleFileUpload(){
+          this.image = this.$refs.image.files[0];
+          this.url = URL.createObjectURL(this.image);
+        },
+        upload () {
+          let formData = new FormData();
+          formData.append('file', this.image);
+          axios.post('http://localhost:7878/upload', formData, {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+            }
+          ).then(function(){
+            console.log('SUCCESS!!');
+          })
+          .catch(function(){
+            console.log('FAILURE!!');
+          });
+        }
+      }
+    })
+
+  </script>
+</html>
