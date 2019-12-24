@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redis/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/main.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/main.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -115,28 +113,30 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="26" />
-          <entry key="js" value="1202" />
+          <entry key="js" value="1270" />
           <entry key="md" value="50" />
-          <entry key="txt" value="32" />
+          <entry key="txt" value="71" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="26" />
-          <entry key="JavaScript" value="1202" />
-          <entry key="PLAIN_TEXT" value="82" />
+          <entry key="JavaScript" value="1270" />
+          <entry key="PLAIN_TEXT" value="121" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
           <entry key="jpg" value="4" />
+          <entry key="js" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
           <entry key="Image" value="4" />
+          <entry key="JavaScript" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -173,8 +173,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+            <state relative-caret-position="238">
+              <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/redis/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -212,6 +221,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -267,6 +283,7 @@
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/frontend/index.html" />
+        <option value="$PROJECT_DIR$/redis/index.js" />
         <option value="$PROJECT_DIR$/controllers/main.controller.js" />
       </list>
     </option>
@@ -366,7 +383,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="20731000" />
+      <workItem from="1577068824241" duration="22526000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -375,11 +392,18 @@
       <option name="project" value="LOCAL" />
       <updated>1577155201807</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary=" - upload sliced images to s3">
+      <created>1577218482908</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1577218482908</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67891000" />
+    <option name="totallyTimeSpent" value="69686000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -412,7 +436,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" - frontend init&#10; - debug upload" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - frontend init&#10; - debug upload" />
+    <MESSAGE value=" - upload sliced images to s3" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - upload sliced images to s3" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -486,10 +511,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/redis/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+        <state relative-caret-position="238">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
         </state>
       </provider>
     </entry>

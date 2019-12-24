@@ -4,9 +4,9 @@ const formidable                   = require('formidable');
 const sharp                        = require('sharp');
 const AWS                          = require("aws-sdk");
 const randomstring                 = require("randomstring");
+const redis                        = require('../redis');
 
 AWS.config = new AWS.Config();
-
 // We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
 AWS.config.accessKeyId = 'AKIAWQ7LVV7TNKIRAEVU';
 AWS.config.secretAccessKey =  '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';
