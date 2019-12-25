@@ -1,4 +1,4 @@
-const { ReE, ReS, to, TE }         = require('../services/UtilService');
+const { ReE, ReS, to, TE, asyncForEach }         = require('../services/UtilService');
 const axios                        = require('axios');
 const formidable                   = require('formidable');
 const sharp                        = require('sharp');
@@ -29,98 +29,125 @@ const upload = async function(req, res){
 				const blurringId = randomstring.generate(7);
 				let urls = {};
 
-				// Top left
-				let [err, buffer] = await to(file.extract({
-					left: xLimit,
-					top: 0,
-					width: xLimit,
-					height: yLimit
-				}).toBuffer());
+				// Original
+				let [err, buffer] = await to(file.toBuffer());
 				if (err) TE(err);
-				let position = 'top-left';
+
+				let position = 'original';
 				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
-				await s3Bucket.putObject({
+				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
 					ContentEncoding: 'base64',
 					ContentType: 'image/png',
 					ACL: 'public-read'
-				}, function (err) {
-					if (err) TE(err);
-				});
+				}).promise());
+				if (err) TE(err);
+
+
+				// Top left
+				[err, buffer] = await to(file.extract({
+					left: 0,
+					top: 0,
+					width: xLimit + 1,
+					height: yLimit + 1
+				}).toBuffer());
+				if (err) TE(err);
+
+				position = 'top-left';
+				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				[err] = await to(s3Bucket.putObject({
+					Key: `images-${blurringId}/${position}.${format}`,
+					Body: Buffer.from(buffer, 'base64'),
+					ContentEncoding: 'base64',
+					ContentType: 'image/png',
+					ACL: 'public-read'
+				}).promise());
+				if (err) TE(err);
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				if (err) {
+					console.log('TOP LEFT ERROR ' + `http://localhost:3333/blur/${blurringId}/${position}.${format}`, err);
+					TE(res, err);
+				}
+
 
 				// Top right
 				[err, buffer] = await to(file.extract({
-					left: xLimit,
+					left: xLimit - 1,
 					top: 0,
-					width: xLimit,
-					height: yLimit
+					width: xLimit + 1,
+					height: yLimit + 1
 				}).toBuffer());
 				if (err) TE(err);
 
 				position = 'top-right';
 				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
-				await s3Bucket.putObject({
+				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
 					ContentEncoding: 'base64',
 					ContentType: 'image/png',
 					ACL: 'public-read'
-				}, function (err) {
-					if (err) TE(err);
-				});
+				}).promise());
+				if (err) TE(err);
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				if (err) TE(res, err);
+
 
 				// Bottom left
 				[err, buffer] = await to(file.extract({
 					left: 0,
-					top: yLimit,
-					width: xLimit,
-					height: yLimit
+					top: yLimit - 1,
+					width: xLimit + 1,
+					height: yLimit + 1
 				}).toBuffer());
 				if (err) TE(err);
 
 				position = 'bottom-left';
 				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
-				await s3Bucket.putObject({
+				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
 					ContentEncoding: 'base64',
 					ContentType: 'image/png',
 					ACL: 'public-read'
-				}, function (err) {
-					if (err) TE(err);
-				});
+				}).promise());
+				if (err) TE(err);
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				if (err) TE(res, err);
 
 				// Bottom right
 				[err, buffer] = await to(file.extract({
-					left: xLimit,
-					top: yLimit,
-					width: xLimit,
-					height: yLimit
+					left: xLimit - 1,
+					top: yLimit - 1,
+					width: xLimit + 1,
+					height: yLimit + 1
 				}).toBuffer());
 				if (err) TE(err);
 
 				position = 'bottom-right';
 				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
-				await s3Bucket.putObject({
+				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
 					ContentEncoding: 'base64',
 					ContentType: 'image/png',
 					ACL: 'public-read'
-				}, function (err) {
-					if (err) TE(err);
-				});
+				}).promise());
+				if (err) TE(err);
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				if (err) TE(res, err);
 
 				// Save to Redis
 				await redis.set(blurringId, JSON.stringify({
-					"original": urls,
+					"original": {...urls, xLimit, yLimit, format },
 					"blurred": {},
 				}));
 
 				return ReS(res, {message: 'Success', blurringId, format});
 			})
 		} catch (err) {
+			console.log(err);
 			return ReE(res, err);
 		}
 	});
@@ -135,7 +162,7 @@ const upload = async function(req, res){
 
 
 	// Ping Service Registry (cPanel) to get location of service with that id
-	let [err, response] = await to(axios.get('http://cpanel:1234/sections/' + body.section));
+	let [err, response] = await to(axios.get('http://localhost:3333/blur/yPDBlSH/bottom-left.jpeg'));
 	if (err) return ReE(res, err);
 
 	// Forward persons to right section and use location(address) from service registry
@@ -165,6 +192,58 @@ const complete = async function (req, res) {
 	const blurringId = req.params.id;
 	console.log('ID: ' + blurringId);
 	console.log(req.body.event.Records[0].s3.object.key);
-	return ReS(res, {message: 'Complete'});
+
+	const topLeft = sharp('https://blurring-images.s3.eu-central-1.amazonaws.com/blurring-' + blurringId + '/complete.jpeg');
+
+	let params = {
+		Bucket: 'blurring-images', /* required */
+		Prefix: 'blurred-' + blurringId  // Can be your folder name
+	};
+	s3Bucket.listObjectsV2(params, async function(err, s3) {
+		if (err) return ReE(res, err);
+		redis.get(blurringId, async function (err, data) {
+
+			const xLimit = JSON.parse(data).original.xLimit;
+			const yLimit = JSON.parse(data).original.yLimit;
+			const format = JSON.parse(data).original.format;
+
+			console.log('REDIS DATA', data);
+
+			let images = [{
+				src: 'https://blurring-images.s3.eu-central-1.amazonaws.com/images-' + blurringId + '/original.' + format, x: 0, y: 0
+			},{},{},{},{}];
+			await asyncForEach(s3.Contents, async (image) => {
+				let url = 'https://blurring-images.s3.eu-central-1.amazonaws.com/' + image.Key;
+				if (image.Key.indexOf('top-left') !== -1) images[1] = { src: url, x: 0, y: 0 };
+				if (image.Key.indexOf('top-right') !== -1) images[2] = { src: url, x: parseInt(xLimit), y: 0 };
+				if (image.Key.indexOf('bottom-left') !== -1) images[3] = { src: url, x: 0, y: parseInt(yLimit) };
+				if (image.Key.indexOf('bottom-right') !== -1) images[4] = { src: url, x: parseInt(xLimit), y: parseInt(yLimit) };
+			});
+
+			console.log(images);
+
+			const mergeImages = require('merge-images');
+			const {Canvas,Image} = require('canvas');
+			Canvas.Image = Image;
+			mergeImages(images, { Canvas: Canvas }).then(async base64 => {
+				await s3Bucket.putObject({
+					Key: `blurred-${blurringId}/complete.${format}`,
+					Body: base64,
+					ContentEncoding: 'base64',
+					ContentType: 'image/png',
+					ACL: 'public-read'
+				}, (err) => {
+					if (err) TE(err);
+
+					require("fs").writeFile("out.png", base64.replace(/^data:image\/png;base64,/, ""), 'base64', function(err) {
+						if (err) console.log(err);
+						else console.log("SAVED COMPLETED IMAGE!");
+					});
+
+					return ReS(res, {message: 'Complete'});
+				});
+			});
+		});
+	});
 };
 module.exports.complete = complete;
