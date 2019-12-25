@@ -45,10 +45,30 @@
       data() {
         return {
           image: '',
-          url: ''
+          url: '',
+          blurringId: '',
+          format: '',
+          checkInterval: null,
+        }
+      },
+      computed: {
+      	completeUrl() {
+      		return `https://blurring-images.s3.eu-central-1.amazonaws.com/blurring-${this.blurringId}/complete.${this.format}`
         }
       },
       methods: {
+        imageExists(image_url){
+          let http = new XMLHttpRequest();
+          http.open('HEAD', image_url, false);
+          http.send();
+          return http.status !== 404;
+        },
+        checkImage(imageSrc, good, bad) {
+          let img = new Image();
+          img.onload = good;
+          img.onerror = bad;
+          img.src = imageSrc;
+        },
         handleFileUpload(){
           this.image = this.$refs.image.files[0];
           this.url = URL.createObjectURL(this.image);
@@ -61,8 +81,16 @@
                   'Content-Type': 'multipart/form-data'
               }
             }
-          ).then(function(){
-            console.log('SUCCESS!!');
+          ).then((body) => {
+            console.log('SUCCESS!!', body.data);
+            this.blurringId = body.data.blurringId;
+            this.format = body.data.format;
+            this.checkInterval = setInterval(() => {
+
+              this.checkImage(this.completeUrl, () => { console.log("exist"); }, () => { console.log("not exist"); } );
+
+
+            }, 1000);
           })
           .catch(function(){
             console.log('FAILURE!!');

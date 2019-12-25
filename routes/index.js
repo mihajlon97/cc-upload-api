@@ -5,6 +5,8 @@ module.exports = function (express) {
 
 	// ----------- Routes -------------
 	router.post('/upload',           MainController.upload);
+	router.get('/list',              MainController.list);
+	router.post('/complete/:id',     MainController.complete);
 
 	return router;
 };

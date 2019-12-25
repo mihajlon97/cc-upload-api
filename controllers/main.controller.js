@@ -118,7 +118,7 @@ const upload = async function(req, res){
 					"blurred": {},
 				}));
 
-				return ReS(res, {message: 'Success', width, height, format});
+				return ReS(res, {message: 'Success', blurringId, format});
 			})
 		} catch (err) {
 			return ReE(res, err);
@@ -147,3 +147,24 @@ const upload = async function(req, res){
 	return ReS(res, {message: 'Success'});
 };
 module.exports.upload = upload;
+
+const list = async function (req, res) {
+	let params = {
+		Bucket: 'blurring-images', /* required */
+		Prefix: 'blurred-1Lq68k2'  // Can be your folder name
+	};
+	s3Bucket.listObjectsV2(params, function(err, data) {
+		if (err) return ReE(res, err);
+		return ReS(res, {message: 'Success', data, filesCount: data.Contents.length});
+	});
+};
+module.exports.list = list;
+
+
+const complete = async function (req, res) {
+	const blurringId = req.params.id;
+	console.log('ID: ' + blurringId);
+	console.log(req.body.event.Records[0].s3.object.key);
+	return ReS(res, {message: 'Complete'});
+};
+module.exports.complete = complete;
