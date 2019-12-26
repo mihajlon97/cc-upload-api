@@ -26,6 +26,8 @@ const upload = async function(req, res){
 				const yLimit = Math.floor(height / 2);
 
 				const blurringId = randomstring.generate(7);
+				console.log('BLURRING ID: ' + blurringId);
+
 				let urls = {};
 
 				// Original
@@ -63,7 +65,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -87,7 +89,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -110,7 +112,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Bottom right
@@ -132,7 +134,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Save to Redis
