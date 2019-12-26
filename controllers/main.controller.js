@@ -17,6 +17,9 @@ const s3Bucket = new AWS.S3({ params: { Bucket: 'blurring-images' }});
  * Upload endpoint
  */
 const upload = async function(req, res){
+	const body = req.body;
+	if (!body.files) return ReE(res, { message: 'INVALID_DATA' });
+
 	let form = new formidable.IncomingForm();
 
 	form.parse(req, function(err, fields, files) {
@@ -149,12 +152,6 @@ const upload = async function(req, res){
 			return ReE(res, err);
 		}
 	});
-	return;
-
-	const body = req.body;
-	console.log(req.file, req.files);
-	if (!body.files)
-		return ReE(res, { message: 'INVALID_DATA' });
 
 	return ReS(res, {message: 'Success'});
 };
@@ -175,11 +172,6 @@ module.exports.list = list;
 
 const complete = async function (req, res) {
 	const blurringId = req.params.id;
-	console.log('ID: ' + blurringId);
-	console.log(req.body.event.Records[0].s3.object.key);
-
-	const topLeft = sharp('https://blurring-images.s3.eu-central-1.amazonaws.com:7878/blurring-' + blurringId + '/complete.jpeg');
-
 	let params = {
 		Bucket: 'blurring-images', /* required */
 		Prefix: 'blurred-' + blurringId  // Can be your folder name
@@ -192,8 +184,6 @@ const complete = async function (req, res) {
 			const yLimit = JSON.parse(data).original.yLimit;
 			const format = JSON.parse(data).original.format;
 
-			console.log('REDIS DATA', data);
-
 			let images = [{
 				src: 'https://blurring-images.s3.eu-central-1.amazonaws.com/images-' + blurringId + '/original.' + format, x: 0, y: 0
 			},{},{},{},{}];
@@ -204,8 +194,6 @@ const complete = async function (req, res) {
 				if (image.Key.indexOf('bottom-left') !== -1) images[3] = { src: url, x: 0, y: parseInt(yLimit) };
 				if (image.Key.indexOf('bottom-right') !== -1) images[4] = { src: url, x: parseInt(xLimit), y: parseInt(yLimit) };
 			});
-
-			console.log(images);
 
 			const mergeImages = require('merge-images');
 			const {Canvas,Image} = require('canvas');

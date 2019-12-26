@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment3-report.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment3-report.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/main.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/main.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/redis/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,17 +111,17 @@
         <counts>
           <entry key="Dockerfile" value="4" />
           <entry key="html" value="698" />
-          <entry key="js" value="3327" />
+          <entry key="js" value="3333" />
           <entry key="md" value="50" />
-          <entry key="txt" value="313" />
+          <entry key="txt" value="345" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="4" />
           <entry key="HTML" value="698" />
-          <entry key="JavaScript" value="3327" />
-          <entry key="PLAIN_TEXT" value="363" />
+          <entry key="JavaScript" value="3333" />
+          <entry key="PLAIN_TEXT" value="395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -195,7 +192,7 @@
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="69" column="23" lean-forward="true" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+              <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -204,7 +201,7 @@
         <entry file="file://$PROJECT_DIR$/redis/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -250,9 +247,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>res.render</find>
-      <find>pe</find>
-      <find>response.body</find>
       <find>console</find>
       <find>sector</find>
       <find>imageToSlices</find>
@@ -279,14 +273,18 @@
       <find>.com/blur</find>
       <find>completedUrl</find>
       <find>completeUrl</find>
+      <find>/blur</find>
       <find>p</find>
+      <find>axios.get</find>
+      <find>7878/blur</find>
     </findStrings>
     <replaceStrings>
       <replace>app</replace>
       <replace>http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com</replace>
-      <replace>+ 1</replace>
       <replace>.com:7878/blur</replace>
+      <replace>+ 1</replace>
       <replace>'images-'+</replace>
+      <replace>3333/blur</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\miki9\Desktop\Notebook\Bachelor Informatik\Semester 6\CC\1 - SaaS\task1\services\collector</dir>
@@ -311,10 +309,10 @@
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/node_modules/merge-images/dist/index.umd.js" />
-        <option value="$PROJECT_DIR$/controllers/main.controller.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/redis/index.js" />
         <option value="$PROJECT_DIR$/frontend/index.html" />
+        <option value="$PROJECT_DIR$/redis/index.js" />
+        <option value="$PROJECT_DIR$/controllers/main.controller.js" />
       </list>
     </option>
   </component>
@@ -429,7 +427,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="60651000" />
+      <workItem from="1577068824241" duration="60855000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -487,17 +485,24 @@
       <option name="project" value="LOCAL" />
       <updated>1577371994701</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- styling&#10;- production urls">
+      <created>1577381020197</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1577381020197</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107811000" />
+    <option name="totallyTimeSpent" value="108015000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13672496" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13672496" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -510,7 +515,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31494662" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31494662" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -531,7 +536,8 @@
     <MESSAGE value=" - lambda endpoint in the moment new image is uploaded&#10; - frontend interval to check completed image" />
     <MESSAGE value=" - frontend interval&#10; - connecting together 4 parts of the image" />
     <MESSAGE value=" - started docs&#10; - api url to aws" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - started docs&#10; - api url to aws" />
+    <MESSAGE value="- styling&#10;- production urls" />
+    <option name="LAST_COMMIT_MESSAGE" value="- styling&#10;- production urls" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -642,14 +648,14 @@
     <entry file="file://$PROJECT_DIR$/redis/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="69" column="23" lean-forward="true" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+          <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
         </state>
       </provider>
     </entry>
