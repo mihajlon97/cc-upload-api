@@ -2,13 +2,18 @@
   <head>
     <title> Group B | Assignment 3</title>
     <style media="screen">
+	  body {
+	   background-color: #eeeeee;
+	  }
       #app {
         padding-top: 100px;
         width: 30%;
         margin: 0 auto;
+	    text-align: center;
       }
 
       #preview {
+	    margin-top: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -18,21 +23,48 @@
         max-width: 100%;
         max-height: 500px;
       }
+
+      input[type="file"] {
+	      display: none;
+      }
+      .custom-file-upload {
+	      width: 80%;
+	      border: 1px solid #ccc;
+	      display: inline-block;
+	      padding: 6px 12px;
+	      cursor: pointer;
+	      border-radius: 13px;
+	      background-color: #f5f5f5;
+      }
+      #submit-btn:hover{
+	      background-color: #43a8e3;
+	      cursor: pointer;
+      }
+      #submit-btn {
+	      width: 100%;
+	      height: 50px;
+	      margin: 30px 0 auto;
+	      background-color: #48c0ff;
+	      border-radius: 13px;
+      }
+
     </style>
   </head>
   <body>
 
     <div id="app">
-      <h1> Group B | Assignment 3 </h1>
+      <h1> Assignment 3 | Group B  </h1>
       <h2> Blurring image </h2>
       <h4> Choose big image (High  resolution) for upload</h4>
 
       <form @submit.prevent="upload">
-        <input ref="image" type="file" name="image" @change="handleFileUpload()">
+	    <label for="file-input" class="custom-file-upload" style="margin: 0 auto;"> {{ image === '' ? 'Choose' : 'Change' }} image </label>
+        <input id="file-input" ref="image" type="file" name="image" @change="handleFileUpload()">
         <div id="preview">
           <img v-if="url" :src="url" />
+          <img v-if="completed" :src="completeUrl" />
         </div>
-        <button type="submit"> Submit </button>
+        <button v-if="image !== ''" id="submit-btn" type="submit"> Submit </button>
       </form>
     </div>
 
@@ -45,15 +77,16 @@
       data() {
         return {
           image: '',
-          url: '',
+          url: 'https://www.penworthy.com/Image/Getimage?id=ItemImages\\H280\\\\9781532106187.jpg',
           blurringId: '',
           format: '',
           checkInterval: null,
+          completed: false,
         }
       },
       computed: {
       	completeUrl() {
-      		return `https://blurring-images.s3.eu-central-1.amazonaws.com/blurred-${this.blurringId}/complete.png`
+      		return `https://blurring-images.s3.eu-central-1.amazonaws.com:7878/blurred-${this.blurringId}/complete.png`
         }
       },
       methods: {
@@ -86,10 +119,10 @@
             this.blurringId = body.data.blurringId;
             this.format = body.data.format;
             this.checkInterval = setInterval(() => {
-
-              this.checkImage(this.completeUrl, () => { console.log("exist"); }, () => { console.log("not exist"); } );
-
-
+              this.checkImage(this.completeUrl, () => {
+              	this.completed = true;
+              	console.log("exist");
+              }, () => { console.log("not exist"); } );
             }, 1000);
           })
           .catch(function(){

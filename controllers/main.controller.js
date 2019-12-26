@@ -64,11 +64,9 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
-				if (err) {
-					console.log('TOP LEFT ERROR ' + `http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`, err);
-					TE(res, err);
-				}
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
+				if (err) TE(res, err);
+
 
 
 				// Top right
@@ -90,7 +88,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -113,7 +111,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Bottom right
@@ -135,7 +133,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Save to Redis
@@ -159,19 +157,6 @@ const upload = async function(req, res){
 		return ReE(res, { message: 'INVALID_DATA' });
 
 	return ReS(res, {message: 'Success'});
-
-
-	// Ping Service Registry (cPanel) to get location of service with that id
-	let [err, response] = await to(axios.get('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/yPDBlSH/bottom-left.jpeg'));
-	if (err) return ReE(res, err);
-
-	// Forward persons to right section and use location(address) from service registry
-	let sectionAddress = response.data.section.address;
-	[err, response] = await to(axios.post(sectionAddress + '/persons', {
-		persons: body.persons
-	}));
-	if (err) return ReE(res, err);
-	return ReS(res, {message: 'Success'});
 };
 module.exports.upload = upload;
 
@@ -193,7 +178,7 @@ const complete = async function (req, res) {
 	console.log('ID: ' + blurringId);
 	console.log(req.body.event.Records[0].s3.object.key);
 
-	const topLeft = sharp('https://blurring-images.s3.eu-central-1.amazonaws.com/blurring-' + blurringId + '/complete.jpeg');
+	const topLeft = sharp('https://blurring-images.s3.eu-central-1.amazonaws.com:7878/blurring-' + blurringId + '/complete.jpeg');
 
 	let params = {
 		Bucket: 'blurring-images', /* required */
