@@ -17,11 +17,7 @@ const s3Bucket = new AWS.S3({ params: { Bucket: 'blurring-images' }});
  * Upload endpoint
  */
 const upload = async function(req, res){
-	const body = req.body;
-	if (body.file === undefined) return ReE(res, { message: 'INVALID_DATA' });
-
 	let form = new formidable.IncomingForm();
-
 	form.parse(req, function(err, fields, files) {
 		try {
 			const file = sharp(files.file.path);
