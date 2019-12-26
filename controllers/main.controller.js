@@ -26,7 +26,7 @@ const upload = async function(req, res){
 				const yLimit = Math.floor(height / 2);
 
 				const blurringId = randomstring.generate(7);
-				console.log('BLURRING ID: ' + blurringId);
+				console.log('BLURRING ID: ' + blurringId,  width, height, format);
 
 				let urls = {};
 
