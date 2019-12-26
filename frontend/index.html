@@ -109,7 +109,7 @@
         upload () {
           let formData = new FormData();
           formData.append('file', this.image);
-          axios.post('http://localhost:7878/upload', formData, {
+          axios.post('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/upload', formData, {
               headers: {
                   'Content-Type': 'multipart/form-data'
               }
