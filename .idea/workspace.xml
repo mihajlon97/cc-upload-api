@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment=" - localhost java api">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment=" - java worker localhost">
       <change beforePath="$PROJECT_DIR$/controllers/main.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/main.controller.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -111,17 +110,17 @@
         <counts>
           <entry key="Dockerfile" value="4" />
           <entry key="html" value="698" />
-          <entry key="js" value="3374" />
+          <entry key="js" value="3384" />
           <entry key="md" value="50" />
-          <entry key="txt" value="457" />
+          <entry key="txt" value="483" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="4" />
           <entry key="HTML" value="698" />
-          <entry key="JavaScript" value="3374" />
-          <entry key="PLAIN_TEXT" value="507" />
+          <entry key="JavaScript" value="3384" />
+          <entry key="PLAIN_TEXT" value="533" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -191,8 +190,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+            <state relative-caret-position="34">
+              <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -247,7 +246,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sector</find>
       <find>imageToSlices</find>
       <find>index</find>
       <find>'images'+</find>
@@ -277,6 +275,7 @@
       <find>7878/blur</find>
       <find>console.log</find>
       <find>localhost</find>
+      <find>ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333</find>
     </findStrings>
     <replaceStrings>
       <replace>app</replace>
@@ -286,6 +285,7 @@
       <replace>'images-'+</replace>
       <replace>3333/blur</replace>
       <replace>ec2-18-184-231-193.eu-central-1.compute.amazonaws.com</replace>
+      <replace>localhost:3333</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\miki9\Desktop\Notebook\Bachelor Informatik\Semester 6\CC\1 - SaaS\task1\services\collector</dir>
@@ -428,7 +428,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="62239000" />
+      <workItem from="1577068824241" duration="64988000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -521,11 +521,18 @@
       <option name="project" value="LOCAL" />
       <updated>1577388222199</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary=" - java worker localhost">
+      <created>1577388651129</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1577388651129</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109399000" />
+    <option name="totallyTimeSpent" value="112148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -570,7 +577,8 @@
     <MESSAGE value=" - production api endpoint" />
     <MESSAGE value=" - sec check for the file" />
     <MESSAGE value=" - sec check for the file removed" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - sec check for the file removed" />
+    <MESSAGE value=" - java worker localhost" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - java worker localhost" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -687,8 +695,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+        <state relative-caret-position="34">
+          <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
         </state>
       </provider>
     </entry>
