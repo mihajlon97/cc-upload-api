@@ -64,9 +64,9 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
 				if (err) {
-					console.log('TOP LEFT ERROR ' + `http://localhost:3333/blur/${blurringId}/${position}.${format}`, err);
+					console.log('TOP LEFT ERROR ' + `http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`, err);
 					TE(res, err);
 				}
 
@@ -90,7 +90,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -113,7 +113,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Bottom right
@@ -135,7 +135,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Save to Redis
@@ -162,7 +162,7 @@ const upload = async function(req, res){
 
 
 	// Ping Service Registry (cPanel) to get location of service with that id
-	let [err, response] = await to(axios.get('http://localhost:3333/blur/yPDBlSH/bottom-left.jpeg'));
+	let [err, response] = await to(axios.get('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com/blur/yPDBlSH/bottom-left.jpeg'));
 	if (err) return ReE(res, err);
 
 	// Forward persons to right section and use location(address) from service registry
