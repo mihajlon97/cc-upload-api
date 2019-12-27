@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment=" - upload to s3 done&#10; - interval checking frontend&#10; - frontend styling done">
+    <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/main.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/main.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,19 +112,19 @@
           <entry key="Dockerfile" value="4" />
           <entry key="env" value="107" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="1326" />
-          <entry key="js" value="4090" />
+          <entry key="html" value="1335" />
+          <entry key="js" value="4112" />
           <entry key="md" value="50" />
-          <entry key="txt" value="596" />
+          <entry key="txt" value="647" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="107" />
           <entry key="Dockerfile" value="4" />
-          <entry key="HTML" value="1326" />
-          <entry key="JavaScript" value="4090" />
-          <entry key="PLAIN_TEXT" value="651" />
+          <entry key="HTML" value="1335" />
+          <entry key="JavaScript" value="4112" />
+          <entry key="PLAIN_TEXT" value="702" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -209,8 +207,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1802">
-              <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+            <state relative-caret-position="221">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -236,8 +234,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="141" selection-start-line="141" selection-end-line="141" />
+            <state relative-caret-position="1717">
+              <caret line="134" column="41" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="41" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -282,7 +280,6 @@
       <find>/blur</find>
       <find>axios.get</find>
       <find>7878/blur</find>
-      <find>localhost</find>
       <find>ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:3333</find>
       <find>v/</find>
       <find>http://localhost:3333</find>
@@ -297,6 +294,7 @@
       <find>preview</find>
       <find>redis.</find>
       <find>console.log</find>
+      <find>localhost</find>
     </findStrings>
     <replaceStrings>
       <replace>app</replace>
@@ -453,7 +451,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="76280000" />
+      <workItem from="1577068824241" duration="77677000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -581,11 +579,25 @@
       <option name="project" value="LOCAL" />
       <updated>1577457824849</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=" - upload to s3 done&#10; - interval checking frontend&#10; - frontend styling done&#10; - code cleaning">
+      <created>1577474283718</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1577474283718</updated>
+    </task>
+    <task id="LOCAL-00020" summary=" - frontend production urls">
+      <created>1577474611813</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1577474611813</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123440000" />
+    <option name="totallyTimeSpent" value="124837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -634,7 +646,9 @@
     <MESSAGE value=" - java worker localhost" />
     <MESSAGE value=" - debugging" />
     <MESSAGE value=" - dotenv env" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - dotenv env" />
+    <MESSAGE value=" - upload to s3 done&#10; - interval checking frontend&#10; - frontend styling done&#10; - code cleaning" />
+    <MESSAGE value=" - frontend production urls" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - frontend production urls" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -753,8 +767,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="141" selection-start-line="141" selection-end-line="141" />
+        <state relative-caret-position="1717">
+          <caret line="134" column="41" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="41" />
           <folding>
             <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -765,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1802">
-          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+        <state relative-caret-position="221">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>

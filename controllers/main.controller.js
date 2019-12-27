@@ -40,7 +40,10 @@ const upload = async function(req, res){
 					ContentType: 'image/png',
 					ACL: 'public-read'
 				}).promise());
-				if (err) TE(err);
+				if (err) {
+					console.error(err);
+					TE(err);
+				}
 
 				// Top left
 				[err, buffer] = await to(file.extract({
