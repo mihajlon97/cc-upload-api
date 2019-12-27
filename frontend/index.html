@@ -3,7 +3,7 @@
     <title> Group B | Assignment 3</title>
     <style media="screen">
 	  body {
-	   background-color: #eeeeee;
+	    background-color: #eeeeee;
 	  }
       #app {
         padding-top: 30px;
@@ -101,18 +101,6 @@
         }
       },
       methods: {
-        imageExists(image_url){
-          let http = new XMLHttpRequest();
-          http.open('HEAD', image_url, false);
-          http.send();
-          return http.status !== 404;
-        },
-        checkImage(imageSrc, good, bad) {
-          let img = new Image();
-          img.onload = good;
-          img.onerror = bad;
-          img.src = imageSrc;
-        },
         handleFileUpload(){
           this.image = this.$refs.image.files[0];
           this.url = URL.createObjectURL(this.image);
