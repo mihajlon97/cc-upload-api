@@ -6,20 +6,19 @@
 	   background-color: #eeeeee;
 	  }
       #app {
-        padding-top: 100px;
+        padding-top: 30px;
         width: 30%;
         margin: 0 auto;
 	    text-align: center;
       }
 
-      #preview {
-	    margin-top: 30px;
+      .preview {
         display: flex;
         justify-content: center;
         align-items: center;
       }
 
-      #preview img {
+      .preview img {
         max-width: 100%;
         max-height: 500px;
       }
@@ -47,7 +46,6 @@
 	      background-color: #48c0ff;
 	      border-radius: 13px;
       }
-
     </style>
   </head>
   <body>
@@ -60,11 +58,23 @@
       <form @submit.prevent="upload">
 	    <label for="file-input" class="custom-file-upload" style="margin: 0 auto;"> {{ image === '' ? 'Choose' : 'Change' }} image </label>
         <input id="file-input" ref="image" type="file" name="image" @change="handleFileUpload()">
-        <div id="preview">
-          <img v-if="url" :src="url" />
-          <img v-if="completed" :src="completeUrl" />
+
+	    <!-- Original Image -->
+	    <h4 style="margin-top: 20px;"> Original image: </h4>
+	    <br>
+	    <div class="preview">
+	        <img v-if="url" :src="url" />
         </div>
-        <button v-if="image !== ''" id="submit-btn" type="submit"> Submit </button>
+
+	    <!-- Blurred Image -->
+	    <h4 v-if="completed" style="margin-top: 30px;"> Blurred image: </h4>
+	    <div v-if="completed" class="preview">
+			<img :src="completeUrl" />
+		</div>
+        <button v-if="image !== ''" id="submit-btn" type="submit" :disabled="loading">
+	        <span v-if="loading"> Loading... </span>
+	        <span v-else> Submit </span>
+        </button>
       </form>
     </div>
 
@@ -82,11 +92,12 @@
           format: '',
           checkInterval: null,
           completed: false,
+          loading: false,
         }
       },
       computed: {
       	completeUrl() {
-      		return `https://blurring-images.s3.eu-central-1.amazonaws.com/blurred-${this.blurringId}/complete.png`
+      		return `http://blurring-images.s3.eu-central-1.amazonaws.com/blurred-${this.blurringId}/complete.${this.format}`
         }
       },
       methods: {
@@ -106,27 +117,37 @@
           this.image = this.$refs.image.files[0];
           this.url = URL.createObjectURL(this.image);
         },
+        isCompleted () {
+          // axios.post('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/complete/' + this.blurringId)
+          axios.get('http://localhost:7878/complete/' + this.blurringId)
+            .then((body) => {
+              if (body.data.completed === true) {
+                this.completed = true;
+                this.loading = false;
+                clearInterval(this.checkInterval);
+              }
+            });
+        },
         upload () {
           let formData = new FormData();
           formData.append('file', this.image);
-          axios.post('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/upload', formData, {
+          this.loading = true;
+          axios.post('http://localhost:7878/upload', formData, {
+          // axios.post('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/upload', formData, {
               headers: {
                   'Content-Type': 'multipart/form-data'
               }
             }
           ).then((body) => {
-            console.log('SUCCESS!!', body.data);
             this.blurringId = body.data.blurringId;
             this.format = body.data.format;
             this.checkInterval = setInterval(() => {
-              this.checkImage(this.completeUrl, () => {
-              	this.completed = true;
-              	console.log("exist");
-              }, () => { console.log("not exist"); } );
+              this.isCompleted()
             }, 1000);
+
           })
           .catch(function(){
-            console.log('FAILURE!!');
+            this.loading = false;
           });
         }
       }

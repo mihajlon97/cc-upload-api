@@ -24,10 +24,7 @@ const upload = async function(req, res){
 			file.metadata().then(async function ({ width, height, format}) {
 				const xLimit = Math.floor(width / 2);
 				const yLimit = Math.floor(height / 2);
-
 				const blurringId = randomstring.generate(7);
-				console.log('BLURRING ID: ' + blurringId,  width, height, format);
-
 				let urls = {};
 
 				// Original
@@ -43,11 +40,7 @@ const upload = async function(req, res){
 					ContentType: 'image/png',
 					ACL: 'public-read'
 				}).promise());
-				if (err) {
-					console.log('S3 Error', err)
-					TE(err);
-				}
-
+				if (err) TE(err);
 
 				// Top left
 				[err, buffer] = await to(file.extract({
@@ -70,7 +63,6 @@ const upload = async function(req, res){
 				if (err) TE(err);
 				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
-
 
 
 				// Top right
@@ -149,15 +141,15 @@ const upload = async function(req, res){
 				return ReS(res, {message: 'Success', blurringId, format});
 			})
 		} catch (err) {
-			console.log(err);
 			return ReE(res, err);
 		}
 	});
-
-	return ReS(res, {message: 'Success'});
 };
 module.exports.upload = upload;
 
+/**
+ * List files in s3 bucket - Testing for Lambda function
+ */
 const list = async function (req, res) {
 	let params = {
 		Bucket: 'blurring-images', /* required */
@@ -171,11 +163,14 @@ const list = async function (req, res) {
 module.exports.list = list;
 
 
+/**
+ * Endpoint triggered by Lambda when blurring is done
+ */
 const complete = async function (req, res) {
 	const blurringId = req.params.id;
 	let params = {
-		Bucket: 'blurring-images', /* required */
-		Prefix: 'blurred-' + blurringId  // Can be your folder name
+		Bucket: 'blurring-images',
+		Prefix: 'blurred-' + blurringId
 	};
 	s3Bucket.listObjectsV2(params, async function(err, s3) {
 		if (err) return ReE(res, err);
@@ -200,20 +195,20 @@ const complete = async function (req, res) {
 			const {Canvas,Image} = require('canvas');
 			Canvas.Image = Image;
 			mergeImages(images, { Canvas: Canvas }).then(async base64 => {
+				let buff = Buffer.from( base64.replace(/^data:image\/png;base64,/, ""), 'base64');
 				await s3Bucket.putObject({
 					Key: `blurred-${blurringId}/complete.${format}`,
-					Body: base64,
+					Body: Buffer.from(buff, 'base64'),
 					ContentEncoding: 'base64',
 					ContentType: 'image/png',
 					ACL: 'public-read'
-				}, (err) => {
+				}, async (err) => {
 					if (err) TE(err);
 
-					require("fs").writeFile("out.png", base64.replace(/^data:image\/png;base64,/, ""), 'base64', function(err) {
-						if (err) console.log(err);
-						else console.log("SAVED COMPLETED IMAGE!");
-					});
-
+					await redis.set(blurringId, JSON.stringify({
+						...data,
+						"blurred": true,
+					}));
 					return ReS(res, {message: 'Complete'});
 				});
 			});
@@ -221,3 +216,17 @@ const complete = async function (req, res) {
 	});
 };
 module.exports.complete = complete;
+
+/**
+ * Polling endpoint to check if blurring process is done
+ * - If completed flag true, blurred image will be displayed on the frontend
+ */
+const isCompleted = async function (req, res) {
+	redis.get(req.params.blurringId, async function (err, result) {
+		const data = JSON.parse(result);
+		if (err) return ReE(res, err);
+		if (data && data.blurred === true) return ReS(res, {completed: true});
+		else return ReS(res, {completed: false});
+	});
+};
+module.exports.isCompleted = isCompleted;
