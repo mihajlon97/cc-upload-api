@@ -8,8 +8,8 @@ const redis                        = require('../redis');
 
 AWS.config = new AWS.Config();
 // We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
-AWS.config.accessKeyId = 'AKIAWQ7LVV7TNKIRAEVU';
-AWS.config.secretAccessKey =  '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';
+AWS.config.accessKeyId = process.env.S3_ACCESS_KEY;
+AWS.config.secretAccessKey = process.env.S3_SECRET_KEY;
 AWS.config.region = 'eu-central-1';
 const s3Bucket = new AWS.S3({ params: { Bucket: 'blurring-images' }});
 
@@ -35,7 +35,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 
 				let position = 'original';
-				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				urls[position] = `${process.env.S3_URL}/images-${blurringId}/${position}.${format}`;
 				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
@@ -59,7 +59,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 
 				position = 'top-left';
-				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				urls[position] = `${process.env.S3_URL}/images-${blurringId}/${position}.${format}`;
 				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
@@ -68,7 +68,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -83,7 +83,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 
 				position = 'top-right';
-				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				urls[position] = `${process.env.S3_URL}/images-${blurringId}/${position}.${format}`;
 				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
@@ -92,7 +92,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 
@@ -106,7 +106,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 
 				position = 'bottom-left';
-				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				urls[position] = `${process.env.S3_URL}/images-${blurringId}/${position}.${format}`;
 				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
@@ -115,7 +115,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Bottom right
@@ -128,7 +128,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 
 				position = 'bottom-right';
-				urls[position] = `https://blurring-images.s3.eu-central-1.amazonaws.com/images-${blurringId}/${position}.${format}`;
+				urls[position] = `${process.env.S3_URL}/images-${blurringId}/${position}.${format}`;
 				[err] = await to(s3Bucket.putObject({
 					Key: `images-${blurringId}/${position}.${format}`,
 					Body: Buffer.from(buffer, 'base64'),
@@ -137,7 +137,7 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`http://localhost:3333/blur/${blurringId}/${position}.${format}`));
+				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				if (err) TE(res, err);
 
 				// Save to Redis
@@ -186,10 +186,10 @@ const complete = async function (req, res) {
 			const format = JSON.parse(data).original.format;
 
 			let images = [{
-				src: 'https://blurring-images.s3.eu-central-1.amazonaws.com/images-' + blurringId + '/original.' + format, x: 0, y: 0
+				src: process.env.S3_URL + '/images-' + blurringId + '/original.' + format, x: 0, y: 0
 			},{},{},{},{}];
 			await asyncForEach(s3.Contents, async (image) => {
-				let url = 'https://blurring-images.s3.eu-central-1.amazonaws.com/' + image.Key;
+				let url = process.env.S3_URL + '/' + image.Key;
 				if (image.Key.indexOf('top-left') !== -1) images[1] = { src: url, x: 0, y: 0 };
 				if (image.Key.indexOf('top-right') !== -1) images[2] = { src: url, x: parseInt(xLimit), y: 0 };
 				if (image.Key.indexOf('bottom-left') !== -1) images[3] = { src: url, x: 0, y: parseInt(yLimit) };
