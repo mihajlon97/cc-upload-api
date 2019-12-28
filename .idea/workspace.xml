@@ -113,9 +113,9 @@
           <entry key="env" value="107" />
           <entry key="gitignore" value="5" />
           <entry key="html" value="1343" />
-          <entry key="js" value="4384" />
+          <entry key="js" value="4404" />
           <entry key="md" value="50" />
-          <entry key="txt" value="700" />
+          <entry key="txt" value="721" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -123,8 +123,8 @@
           <entry key=".env file" value="107" />
           <entry key="Dockerfile" value="4" />
           <entry key="HTML" value="1343" />
-          <entry key="JavaScript" value="4384" />
-          <entry key="PLAIN_TEXT" value="755" />
+          <entry key="JavaScript" value="4404" />
+          <entry key="PLAIN_TEXT" value="776" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -198,8 +198,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="160" column="20" selection-start-line="160" selection-start-column="20" selection-end-line="160" selection-end-column="20" />
+            <state relative-caret-position="102">
+              <caret line="177" column="4" lean-forward="true" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -459,7 +459,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="85314000" />
+      <workItem from="1577068824241" duration="86011000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -636,11 +636,25 @@
       <option name="project" value="LOCAL" />
       <updated>1577491021572</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary=" - debug without list">
+      <created>1577498282255</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1577498282255</updated>
+    </task>
+    <task id="LOCAL-00027" summary=" - debug without list">
+      <created>1577498551070</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1577498551070</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132474000" />
+    <option name="totallyTimeSpent" value="133171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -695,7 +709,8 @@
     <MESSAGE value=" - clearing frontend" />
     <MESSAGE value=" - added lambda" />
     <MESSAGE value=" - docs" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - docs" />
+    <MESSAGE value=" - debug without list" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - debug without list" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -833,8 +848,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="160" column="20" selection-start-line="160" selection-start-column="20" selection-end-line="160" selection-end-column="20" />
+        <state relative-caret-position="102">
+          <caret line="177" column="4" lean-forward="true" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
         </state>
       </provider>
     </entry>

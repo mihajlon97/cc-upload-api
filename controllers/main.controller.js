@@ -158,10 +158,7 @@ const list = async function (req, res) {
 		Bucket: 'blurring-images', /* required */
 		Prefix: 'blurred-1eFJ1kf'  // Can be your folder name
 	};
-	redis.get('1eFJ1kf', async function (err, data) {
-console.log(data);
-	});
-		s3Bucket.listObjectsV2(params, function(err, data) {
+	s3Bucket.listObjectsV2(params, function(err, data) {
 		if (err) return ReE(res, err);
 		return ReS(res, {message: 'Success', data, filesCount: data.Contents.length});
 	});
@@ -174,60 +171,50 @@ module.exports.list = list;
  */
 const complete = async function (req, res) {
 	const blurringId = req.params.id;
-	let params = {
-		Bucket: 'blurring-images',
-		Prefix: 'blurred-' + blurringId
-	};
-	// s3Bucket.listObjectsV2(params, async function(err, s3) {
-	//	if (err) return ReE(res, err);
-	console.log(params);
-		redis.get(blurringId, async function (err, data) {
+	redis.get(blurringId, async function (err, data) {
 
-			console.log("REDIS DATA", data);
+		const xLimit = JSON.parse(data).original.xLimit;
+		const yLimit = JSON.parse(data).original.yLimit;
+		const format = JSON.parse(data).original.format;
 
-			const xLimit = JSON.parse(data).original.xLimit;
-			const yLimit = JSON.parse(data).original.yLimit;
-			const format = JSON.parse(data).original.format;
-
-			let images = [{
-				src: process.env.S3_URL + '/images-' + blurringId + '/original.' + format, x: 0, y: 0
+		let images = [{
+			src: process.env.S3_URL + '/images-' + blurringId + '/original.' + format, x: 0, y: 0
+		},
+			{
+				src: JSON.parse(data).original['top-left'].replace(/images-/, 'blurred-'), x: 0, y: 0
 			},
-				{
-					src: JSON.parse(data).original['top-left'].replace(/images-/, 'blurred-'), x: 0, y: 0
-				},
-				{
-					src: JSON.parse(data).original['top-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: 0
-				},
-				{
-					src: JSON.parse(data).original['bottom-left'].replace(/images-/, 'blurred-'), x: 0, y: parseInt(yLimit)
-				},
-				{
-					src: JSON.parse(data).original['bottom-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: parseInt(yLimit)
-				}];
+			{
+				src: JSON.parse(data).original['top-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: 0
+			},
+			{
+				src: JSON.parse(data).original['bottom-left'].replace(/images-/, 'blurred-'), x: 0, y: parseInt(yLimit)
+			},
+			{
+				src: JSON.parse(data).original['bottom-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: parseInt(yLimit)
+			}];
 
-			const mergeImages = require('merge-images');
-			const {Canvas,Image} = require('canvas');
-			Canvas.Image = Image;
-			mergeImages(images, { Canvas: Canvas }).then(async base64 => {
-				let buff = Buffer.from( base64.replace(/^data:image\/png;base64,/, ""), 'base64');
-				await s3Bucket.putObject({
-					Key: `blurred-${blurringId}/complete.${format}`,
-					Body: Buffer.from(buff, 'base64'),
-					ContentEncoding: 'base64',
-					ContentType: 'image/png',
-					ACL: 'public-read'
-				}, async (err) => {
-					if (err) TE(err);
+		const mergeImages = require('merge-images');
+		const {Canvas,Image} = require('canvas');
+		Canvas.Image = Image;
+		mergeImages(images, { Canvas: Canvas }).then(async base64 => {
+			let buff = Buffer.from( base64.replace(/^data:image\/png;base64,/, ""), 'base64');
+			await s3Bucket.putObject({
+				Key: `blurred-${blurringId}/complete.${format}`,
+				Body: Buffer.from(buff, 'base64'),
+				ContentEncoding: 'base64',
+				ContentType: 'image/png',
+				ACL: 'public-read'
+			}, async (err) => {
+				if (err) TE(err);
 
-					await redis.set(blurringId, JSON.stringify({
-						...data,
-						"blurred": true,
-					}));
-					return ReS(res, {message: 'Complete'});
-				});
+				await redis.set(blurringId, JSON.stringify({
+					...data,
+					"blurred": true,
+				}));
+				return ReS(res, {message: 'Complete'});
 			});
 		});
-	// });
+	});
 };
 module.exports.complete = complete;
 
