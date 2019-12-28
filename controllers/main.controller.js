@@ -193,16 +193,16 @@ const complete = async function (req, res) {
 				src: process.env.S3_URL + '/images-' + blurringId + '/original.' + format, x: 0, y: 0
 			},
 				{
-					src: JSON.parse(data).original['top-left'], x: 0, y: 0
+					src: JSON.parse(data).original['top-left'].replace(/images-/, 'blurred-'), x: 0, y: 0
 				},
 				{
-					src: JSON.parse(data).original['top-right'], x: parseInt(xLimit), y: 0
+					src: JSON.parse(data).original['top-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: 0
 				},
 				{
-					src: JSON.parse(data).original['bottom-left'], x: 0, y: parseInt(yLimit)
+					src: JSON.parse(data).original['bottom-left'].replace(/images-/, 'blurred-'), x: 0, y: parseInt(yLimit)
 				},
 				{
-					src: JSON.parse(data).original['bottom-right'], x: parseInt(xLimit), y: parseInt(yLimit)
+					src: JSON.parse(data).original['bottom-right'].replace(/images-/, 'blurred-'), x: parseInt(xLimit), y: parseInt(yLimit)
 				}];
 
 			const mergeImages = require('merge-images');
