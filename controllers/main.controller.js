@@ -156,9 +156,12 @@ module.exports.upload = upload;
 const list = async function (req, res) {
 	let params = {
 		Bucket: 'blurring-images', /* required */
-		Prefix: 'blurred-1Lq68k2'  // Can be your folder name
+		Prefix: 'blurred-1eFJ1kf'  // Can be your folder name
 	};
-	s3Bucket.listObjectsV2(params, function(err, data) {
+	redis.get('1eFJ1kf', async function (err, data) {
+console.log(data);
+	});
+		s3Bucket.listObjectsV2(params, function(err, data) {
 		if (err) return ReE(res, err);
 		return ReS(res, {message: 'Success', data, filesCount: data.Contents.length});
 	});
@@ -175,9 +178,12 @@ const complete = async function (req, res) {
 		Bucket: 'blurring-images',
 		Prefix: 'blurred-' + blurringId
 	};
-	s3Bucket.listObjectsV2(params, async function(err, s3) {
-		if (err) return ReE(res, err);
+	// s3Bucket.listObjectsV2(params, async function(err, s3) {
+	//	if (err) return ReE(res, err);
+	console.log(params);
 		redis.get(blurringId, async function (err, data) {
+
+			console.log("REDIS DATA", data);
 
 			const xLimit = JSON.parse(data).original.xLimit;
 			const yLimit = JSON.parse(data).original.yLimit;
@@ -185,14 +191,19 @@ const complete = async function (req, res) {
 
 			let images = [{
 				src: process.env.S3_URL + '/images-' + blurringId + '/original.' + format, x: 0, y: 0
-			},{},{},{},{}];
-			await asyncForEach(s3.Contents, async (image) => {
-				let url = process.env.S3_URL + '/' + image.Key;
-				if (image.Key.indexOf('top-left') !== -1) images[1] = { src: url, x: 0, y: 0 };
-				if (image.Key.indexOf('top-right') !== -1) images[2] = { src: url, x: parseInt(xLimit), y: 0 };
-				if (image.Key.indexOf('bottom-left') !== -1) images[3] = { src: url, x: 0, y: parseInt(yLimit) };
-				if (image.Key.indexOf('bottom-right') !== -1) images[4] = { src: url, x: parseInt(xLimit), y: parseInt(yLimit) };
-			});
+			},
+				{
+					src: JSON.parse(data).original['top-left'], x: 0, y: 0
+				},
+				{
+					src: JSON.parse(data).original['top-right'], x: parseInt(xLimit), y: 0
+				},
+				{
+					src: JSON.parse(data).original['bottom-left'], x: 0, y: parseInt(yLimit)
+				},
+				{
+					src: JSON.parse(data).original['bottom-right'], x: parseInt(xLimit), y: parseInt(yLimit)
+				}];
 
 			const mergeImages = require('merge-images');
 			const {Canvas,Image} = require('canvas');
@@ -216,7 +227,7 @@ const complete = async function (req, res) {
 				});
 			});
 		});
-	});
+	// });
 };
 module.exports.complete = complete;
 
