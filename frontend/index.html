@@ -97,7 +97,7 @@
       },
       computed: {
       	completeUrl() {
-      		return `http://blurring-images.s3.eu-central-1.amazonaws.com/blurred-${this.blurringId}/complete.${this.format}`
+      		return `http://blur-images.s3.us-east-1.amazonaws.com/blurred-${this.blurringId}/complete.${this.format}`
         }
       },
       methods: {
@@ -106,7 +106,7 @@
           this.url = URL.createObjectURL(this.image);
         },
         isCompleted () {
-          axios.get('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/complete/' + this.blurringId)
+          axios.get('http://ec2-54-197-11-151.compute-1.amazonaws.com:7878/complete/' + this.blurringId)
           // axios.get('http://localhost:7878/complete/' + this.blurringId)
             .then((body) => {
               if (body.data.completed === true) {
@@ -121,7 +121,7 @@
           formData.append('file', this.image);
           this.loading = true;
           // axios.post('http://localhost:7878/upload', formData, {
-          axios.post('http://ec2-18-184-231-193.eu-central-1.compute.amazonaws.com:7878/upload', formData, {
+          axios.post('http://ec2-54-197-11-151.compute-1.amazonaws.com:7878/upload', formData, {
               headers: {
                   'Content-Type': 'multipart/form-data'
               }

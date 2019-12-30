@@ -1,4 +1,4 @@
-const { ReE, ReS, to, TE, asyncForEach }         = require('../services/UtilService');
+const { ReE, ReS, to, TE }         = require('../services/UtilService');
 const axios                        = require('axios');
 const formidable                   = require('formidable');
 const sharp                        = require('sharp');
@@ -8,10 +8,10 @@ const redis                        = require('../redis');
 
 AWS.config = new AWS.Config();
 // We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
-AWS.config.accessKeyId = process.env.S3_ACCESS_KEY;
-AWS.config.secretAccessKey = process.env.S3_SECRET_KEY;
-AWS.config.region = 'eu-central-1';
-const s3Bucket = new AWS.S3({ params: { Bucket: 'blurring-images' }});
+AWS.config.accessKeyId = null;
+AWS.config.secretAccessKey = null;
+AWS.config.region = 'us-east-1';
+const s3Bucket = new AWS.S3({ params: { Bucket: 'blur-images' }});
 
 /**
  * Upload endpoint
@@ -155,7 +155,7 @@ module.exports.upload = upload;
  */
 const list = async function (req, res) {
 	let params = {
-		Bucket: 'blurring-images', /* required */
+		Bucket: 'blur-images', /* required */
 		Prefix: 'blurred-1eFJ1kf'  // Can be your folder name
 	};
 	s3Bucket.listObjectsV2(params, function(err, data) {
