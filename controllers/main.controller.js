@@ -4,7 +4,7 @@ const formidable                   = require('formidable');
 const sharp                        = require('sharp');
 const AWS                          = require("aws-sdk");
 const randomstring                 = require("randomstring");
-const redis                        = require('../redis');
+const {dbClient, publisher}        = require('../redis');
 
 AWS.config = new AWS.Config();
 // We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
@@ -64,8 +64,9 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
-				if (err) TE(res, err);
+				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
+				//if (err) TE(res, err);
+				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
 
 
 				// Top right
@@ -87,8 +88,9 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
-				if (err) TE(res, err);
+				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
+				//if (err) TE(res, err);
+				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
 
 
 				// Bottom left
@@ -110,8 +112,9 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
-				if (err) TE(res, err);
+				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
+				//if (err) TE(res, err);
+				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
 
 				// Bottom right
 				[err, buffer] = await to(file.extract({
@@ -132,11 +135,12 @@ const upload = async function(req, res){
 					ACL: 'public-read'
 				}).promise());
 				if (err) TE(err);
-				[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
-				if (err) TE(res, err);
+				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
+				//if (err) TE(res, err);
+				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
 
 				// Save to Redis
-				await redis.set(blurringId, JSON.stringify({
+				await dbClient.set(blurringId, JSON.stringify({
 					"original": {...urls, xLimit, yLimit, format },
 					"blurred": {},
 				}));
@@ -171,7 +175,7 @@ module.exports.list = list;
  */
 const complete = async function (req, res) {
 	const blurringId = req.params.id;
-	redis.get(blurringId, async function (err, data) {
+	dbClient.get(blurringId, async function (err, data) {
 
 		const xLimit = JSON.parse(data).original.xLimit;
 		const yLimit = JSON.parse(data).original.yLimit;
@@ -207,7 +211,7 @@ const complete = async function (req, res) {
 			}, async (err) => {
 				if (err) TE(err);
 
-				await redis.set(blurringId, JSON.stringify({
+				await dbClient.set(blurringId, JSON.stringify({
 					...data,
 					"blurred": true,
 				}));
@@ -223,7 +227,7 @@ module.exports.complete = complete;
  * - If completed flag true, blurred image will be displayed on the frontend
  */
 const isCompleted = async function (req, res) {
-	redis.get(req.params.blurringId, async function (err, result) {
+	dbClient.get(req.params.blurringId, async function (err, result) {
 		const data = JSON.parse(result);
 		if (err) return ReE(res, err);
 		if (data && data.blurred === true) return ReS(res, {completed: true});
