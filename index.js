@@ -43,14 +43,11 @@ http.listen(port, function(){
 let io = require('socket.io')(http);
 
 io.on('connection', socket => {
-	console.log('SOCKET CONNECTED');
-	socket.on('image_selected', function(data){
-		console.log('SOCKET', data)
-	});
-
+	console.log('Client connected');
 	setInterval(() => {
+		console.log('Progress plus 10');
 		socket.emit('progress', 10);
-	}, 1000);
+	}, 3000);
 });
 
 

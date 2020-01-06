@@ -80,7 +80,6 @@
 	    <div v-if="completed" class="preview">
 			<img :src="completeUrl" />
 		</div>
-	      <span @click.prevent="emit">Emit</span>
         <button v-if="image !== ''" id="submit-btn" type="submit" :disabled="loading">
 	        <span v-if="loading"> Loading... </span>
 	        <span v-else> Submit </span>
@@ -120,9 +119,6 @@
 	      this.socket.on('disconnect', function(){ });
       },
       methods: {
-	    emit(){
-	      this.socket.emit('image_selected', { data: 'data' });
-	    },
         handleFileUpload(){
           this.image = this.$refs.image.files[0];
           this.url = URL.createObjectURL(this.image);
