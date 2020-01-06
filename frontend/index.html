@@ -47,6 +47,13 @@
 	      border-radius: 13px;
       }
     </style>
+
+
+	  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/vue-simple-progress@1.1.0/dist/vue-simple-progress.min.js"></script>
+
   </head>
   <body>
 
@@ -66,7 +73,9 @@
 	        <img v-if="url" :src="url" />
         </div>
 
-	    <!-- Blurred Image -->
+	    <vue-simple-progress size="medium" :val="progress" :text="progress + ' %'"> </vue-simple-progress>
+
+	      <!-- Blurred Image -->
 	    <h4 v-if="completed" style="margin-top: 30px;"> Blurred image: </h4>
 	    <div v-if="completed" class="preview">
 			<img :src="completeUrl" />
@@ -79,8 +88,6 @@
     </div>
 
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
     var app = new Vue({
       el: '#app',
@@ -93,12 +100,23 @@
           checkInterval: null,
           completed: false,
           loading: false,
+          progress: 0,
         }
       },
       computed: {
       	completeUrl() {
       		return `http://blur-images.s3.us-east-1.amazonaws.com/blurred-${this.blurringId}/complete.${this.format}`
         }
+      },
+      mounted () {
+	      // this.socket = io('http://ec2-54-197-11-151.compute-1.amazonaws.com:7878');
+	      this.socket = io('http://localhost:7878');
+	      this.socket.on('connect', function(){ });
+	      this.socket.on('progress', (data) => {
+	      	if(this.progress >= 100) return;
+	      	this.progress = this.progress + data;
+	      });
+	      this.socket.on('disconnect', function(){ });
       },
       methods: {
         handleFileUpload(){

@@ -66,7 +66,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				//if (err) TE(res, err);
-				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
+				publisher.publish("java_node_channel_1", blurringId + '---' + position + '.' + format);
 
 
 				// Top right
@@ -90,7 +90,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				//if (err) TE(res, err);
-				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
+				publisher.publish("java_node_channel_1", blurringId + '---' + position + '.' + format);
 
 
 				// Bottom left
@@ -114,7 +114,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				//if (err) TE(res, err);
-				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
+				publisher.publish("java_node_channel_1", blurringId + '---' + position + '.' + format);
 
 				// Bottom right
 				[err, buffer] = await to(file.extract({
@@ -137,7 +137,7 @@ const upload = async function(req, res){
 				if (err) TE(err);
 				//[err] = await to(axios.get(`${process.env.WORKER_URL}/blur/${blurringId}/${position}.${format}`));
 				//if (err) TE(res, err);
-				publisher.publish("java_node_channel_1", JSON.stringify({ start: true }));
+				publisher.publish("java_node_channel_1", blurringId + '---' + position + '.' + format);
 
 				// Save to Redis
 				await dbClient.set(blurringId, JSON.stringify({
