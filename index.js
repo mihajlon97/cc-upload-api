@@ -8,6 +8,7 @@ const cors       = require('cors');
 const routes = require('./routes')(express);
 
 const app = express();
+var http = require('http').Server(app);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -24,19 +25,32 @@ app.get('/', function(req, res) {
 	res.sendFile(require('path').join(__dirname + '/frontend/index.html'));
 });
 
-// Catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-//This is here to handle all the uncaught promise rejections
-process.on('unhandledRejection', error => {
-    console.error('Uncaught Error', pe(error));
-});
 
 const port = '7878';
+
 //Listen to port
-app.listen(port);
-console.log("Listening to port: " + port);
+// let server = app.listen(port);
+// console.log("Listening to port: " + port);
+// http.listen(port, () => {
+// 	console.log("Listening to port: " + port);
+// });
+
+http.listen(port, function(){
+	console.log('Listening on port:' + port);
+});
+
+// Socket.io
+let io = require('socket.io')(http);
+
+io.on('connection', socket => {
+	console.log('SOCKET CONNECTED');
+	socket.on('image_selected', function(data){
+		console.log('SOCKET', data)
+	});
+
+	setInterval(() => {
+		socket.emit('progress', 10);
+	}, 1000);
+});
+
+
