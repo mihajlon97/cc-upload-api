@@ -4,7 +4,6 @@
     <list default="true" id="ff265864-cc49-460b-9211-645c1aca79b3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,19 +112,19 @@
           <entry key="Dockerfile" value="4" />
           <entry key="env" value="109" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="1901" />
-          <entry key="js" value="5265" />
+          <entry key="html" value="1910" />
+          <entry key="js" value="5284" />
           <entry key="md" value="50" />
-          <entry key="txt" value="923" />
+          <entry key="txt" value="970" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="109" />
           <entry key="Dockerfile" value="4" />
-          <entry key="HTML" value="1901" />
-          <entry key="JavaScript" value="5265" />
-          <entry key="PLAIN_TEXT" value="978" />
+          <entry key="HTML" value="1910" />
+          <entry key="JavaScript" value="5284" />
+          <entry key="PLAIN_TEXT" value="1025" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -172,8 +171,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
+            <state relative-caret-position="236">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -208,8 +207,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+            <state relative-caret-position="101">
+              <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -248,7 +247,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>checkImage</find>
       <find>imageExists</find>
       <find>image</find>
       <find>completed</find>
@@ -275,9 +273,10 @@
       <find>mounted</find>
       <find>progress</find>
       <find>subscribe</find>
+      <find>emit</find>
       <find>JSON.stringify({ start: true })</find>
       <find>http</find>
-      <find>emit</find>
+      <find>localhost</find>
     </findStrings>
     <replaceStrings>
       <replace>app</replace>
@@ -449,7 +448,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="123940000" />
+      <workItem from="1577068824241" duration="124414000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -675,11 +674,25 @@
       <option name="project" value="LOCAL" />
       <updated>1578346473551</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary=" - progress with sockets done.&#10; - pubsub fixed">
+      <created>1578424183509</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1578424183509</updated>
+    </task>
+    <task id="LOCAL-00034" summary=" - progress with sockets done.&#10; - pubsub fixed">
+      <created>1578424558070</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1578424558070</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171100000" />
+    <option name="totallyTimeSpent" value="171574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -713,7 +726,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - redis" />
     <MESSAGE value=" - redis upload" />
     <MESSAGE value=" - lambda endpoint in the moment new image is uploaded&#10; - frontend interval to check completed image" />
     <MESSAGE value=" - frontend interval&#10; - connecting together 4 parts of the image" />
@@ -738,7 +750,8 @@
     <MESSAGE value=" - redis pubsub" />
     <MESSAGE value=" - socket and progress bar basic implementation" />
     <MESSAGE value=" - pubsub worker done&#10; - TODO: receive when done each and update progress bar!" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - pubsub worker done&#10; - TODO: receive when done each and update progress bar!" />
+    <MESSAGE value=" - progress with sockets done.&#10; - pubsub fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - progress with sockets done.&#10; - pubsub fixed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -871,15 +884,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
+        <state relative-caret-position="236">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+        <state relative-caret-position="101">
+          <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
