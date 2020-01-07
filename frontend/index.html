@@ -114,7 +114,7 @@
 	      this.socket.on('connect', function(){ });
 	      this.socket.on('progress', (data) => {
 	      	if(this.progress >= 100) return;
-	      	this.progress = this.progress + data;
+	      	this.progress += data;
 	      });
 	      this.socket.on('disconnect', function(){ });
       },
@@ -130,6 +130,7 @@
               if (body.data.completed === true) {
                 this.completed = true;
                 this.loading = false;
+                this.progress += 10;
                 clearInterval(this.checkInterval);
               }
             });
@@ -147,6 +148,7 @@
           ).then((body) => {
             this.blurringId = body.data.blurringId;
             this.format = body.data.format;
+            this.progress += 10;
             this.checkInterval = setInterval(() => {
               this.isCompleted()
             }, 1000);

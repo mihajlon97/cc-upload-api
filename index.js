@@ -41,13 +41,28 @@ http.listen(port, function(){
 
 // Socket.io
 let io = require('socket.io')(http);
+let {subscriber, publisher} = require('./redis');
+
+subscriber.subscribe("java_node_channel_1");
+subscriber.subscribe("java_node_channel_2");
+subscriber.subscribe("java_node_channel_3");
+subscriber.subscribe("java_node_channel_4");
 
 io.on('connection', socket => {
 	console.log('Client connected');
+
+	subscriber.on("message",(channel,message) => {
+		if (channel.indexOf('java_node_channel_') !== -1) {
+			console.log("Received data :"+message + " Channel: " + channel);
+			socket.emit('progress', 20);
+		}
+	});
+	/*
+	publisher.publish("java_node_channel_1", 'da---da');
 	setInterval(() => {
 		console.log('Progress plus 10');
 		socket.emit('progress', 10);
 	}, 3000);
+	*/
 });
-
 

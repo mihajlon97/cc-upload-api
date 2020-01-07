@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,19 +113,19 @@
           <entry key="Dockerfile" value="4" />
           <entry key="env" value="109" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="1896" />
-          <entry key="js" value="4888" />
+          <entry key="html" value="1901" />
+          <entry key="js" value="5265" />
           <entry key="md" value="50" />
-          <entry key="txt" value="782" />
+          <entry key="txt" value="923" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="109" />
           <entry key="Dockerfile" value="4" />
-          <entry key="HTML" value="1896" />
-          <entry key="JavaScript" value="4888" />
-          <entry key="PLAIN_TEXT" value="837" />
+          <entry key="HTML" value="1901" />
+          <entry key="JavaScript" value="5265" />
+          <entry key="PLAIN_TEXT" value="978" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -137,7 +135,7 @@
           <entry key="gitignore" value="1" />
           <entry key="html" value="1" />
           <entry key="jpg" value="4" />
-          <entry key="js" value="6" />
+          <entry key="js" value="7" />
           <entry key="png" value="2" />
           <entry key="ts" value="3" />
         </counts>
@@ -148,7 +146,7 @@
           <entry key="Dockerfile" value="2" />
           <entry key="HTML" value="1" />
           <entry key="Image" value="6" />
-          <entry key="JavaScript" value="6" />
+          <entry key="JavaScript" value="7" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="TypeScript" value="3" />
         </counts>
@@ -174,8 +172,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+            <state relative-caret-position="202">
+              <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -201,8 +199,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="142" column="55" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
+            <state relative-caret-position="253">
+              <caret line="68" column="41" selection-start-line="68" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -210,8 +208,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="116" column="44" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
+            <state relative-caret-position="268">
+              <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -250,9 +248,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>redis.</find>
-      <find>localhost</find>
-      <find>handleFileUpload</find>
       <find>checkImage</find>
       <find>imageExists</find>
       <find>image</find>
@@ -277,9 +272,12 @@
       <find>publisher</find>
       <find>JSON.stringify()</find>
       <find>express</find>
-      <find>emit</find>
       <find>mounted</find>
+      <find>progress</find>
+      <find>subscribe</find>
+      <find>JSON.stringify({ start: true })</find>
       <find>http</find>
+      <find>emit</find>
     </findStrings>
     <replaceStrings>
       <replace>app</replace>
@@ -298,6 +296,7 @@
       <replace>${process.env.WORKER_URL}</replace>
       <replace>dbClient</replace>
       <replace>JSON</replace>
+      <replace>blurringId + '---' + position + '.' + format</replace>
       <replace>JSON.stringify({ start: true })</replace>
     </replaceStrings>
     <dirStrings>
@@ -324,8 +323,8 @@
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/lambda/index.js" />
         <option value="$PROJECT_DIR$/redis/index.js" />
-        <option value="$PROJECT_DIR$/controllers/main.controller.js" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/controllers/main.controller.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/frontend/index.html" />
       </list>
@@ -450,7 +449,7 @@
       <workItem from="1572647767584" duration="3819000" />
       <workItem from="1574693574294" duration="4395000" />
       <workItem from="1574904012808" duration="34000" />
-      <workItem from="1577068824241" duration="117192000" />
+      <workItem from="1577068824241" duration="123940000" />
     </task>
     <task id="LOCAL-00001" summary=" - frontend init&#10; - debug upload">
       <created>1577155201807</created>
@@ -662,14 +661,29 @@
       <option name="project" value="LOCAL" />
       <updated>1577912815670</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary=" - socket and progress bar basic implementation">
+      <created>1578344171638</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1578344171638</updated>
+    </task>
+    <task id="LOCAL-00032" summary=" - pubsub worker done&#10; - TODO: receive when done each and update progress bar!">
+      <created>1578346473551</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1578346473551</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164352000" />
+    <option name="totallyTimeSpent" value="171100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13672496" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -699,8 +713,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - frontend init&#10; - debug upload" />
-    <MESSAGE value=" - upload sliced images to s3" />
     <MESSAGE value=" - redis" />
     <MESSAGE value=" - redis upload" />
     <MESSAGE value=" - lambda endpoint in the moment new image is uploaded&#10; - frontend interval to check completed image" />
@@ -724,7 +736,9 @@
     <MESSAGE value=" - cleaning" />
     <MESSAGE value=" - new setup with new account" />
     <MESSAGE value=" - redis pubsub" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - redis pubsub" />
+    <MESSAGE value=" - socket and progress bar basic implementation" />
+    <MESSAGE value=" - pubsub worker done&#10; - TODO: receive when done each and update progress bar!" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - pubsub worker done&#10; - TODO: receive when done each and update progress bar!" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/middleware/authUser.js" />
@@ -827,24 +841,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="142" column="55" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/redis/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="31" selection-start-column="31" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -855,17 +855,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/redis/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/main.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="68" column="41" selection-start-line="68" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+        <state relative-caret-position="202">
+          <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="116" column="44" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
+        <state relative-caret-position="268">
+          <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
