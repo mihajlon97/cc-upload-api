@@ -51,9 +51,8 @@ subscriber.subscribe("java_node_channel_4");
 io.on('connection', socket => {
 	console.log('Client connected');
 
-	subscriber.on("message",(channel,message) => {
-		if (channel.indexOf('java_node_channel_') !== -1) {
-			console.log("Received data :"+message + " Channel: " + channel);
+	subscriber.on("message",(channel, message) => {
+		if (message === 'done'){
 			socket.emit('progress', 20);
 		}
 	});
