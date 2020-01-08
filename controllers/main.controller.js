@@ -8,8 +8,8 @@ const {dbClient, publisher}        = require('../redis');
 
 AWS.config = new AWS.Config();
 // We know this is bad, but to avoid sending .env file separate to the teacher we used secret keys diretly in the code
-AWS.config.accessKeyId = null;
-AWS.config.secretAccessKey = null;
+AWS.config.accessKeyId = process.env.S3_ACCESS_KEY;
+AWS.config.secretAccessKey = process.env.S3_SECRET_KEY;
 AWS.config.region = 'us-east-1';
 const s3Bucket = new AWS.S3({ params: { Bucket: 'blur-images' }});
 
